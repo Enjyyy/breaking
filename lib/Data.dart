@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:breaking/CustomWidgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 final category = [
   ['assets/breakingimg.jpg', ''],
@@ -22,11 +23,11 @@ Future<void> getNews() async {
   if (jsonData["status"] == "ok") {
     jsonData["articles"].forEach((div) {
       ArticleDiv article = ArticleDiv(
-          func: () {},
           imgSrc: div["urlToImage"].toString(),
           info: div["content"].toString(),
           header: div["title"].toString(),
-          author: div["author"].toString());
+          author: div["author"].toString(),
+          urll: div["url"].toString());
       articles.add(article);
       print(articles[articles.length - 1].author);
     });
@@ -41,11 +42,11 @@ Future<void> getPoliticsNews() async {
   if (jsonData["status"] == "ok") {
     jsonData["articles"].forEach((div) {
       ArticleDiv article = ArticleDiv(
-          func: () {},
           imgSrc: div["urlToImage"].toString(),
           info: div["content"].toString(),
           header: div["title"].toString(),
-          author: div["author"].toString());
+          author: div["author"].toString(),
+          urll: div["url"].toString());
       politicsArticles.add(article);
       print(politicsArticles[politicsArticles.length - 1].author);
     });
@@ -60,11 +61,11 @@ Future<void> getSportsNews() async {
   if (jsonData["status"] == "ok") {
     jsonData["articles"].forEach((div) {
       ArticleDiv article = ArticleDiv(
-          func: () {},
           imgSrc: div["urlToImage"].toString(),
           info: div["content"].toString(),
           header: div["title"].toString(),
-          author: div["author"].toString());
+          author: div["author"].toString(),
+          urll: div["url"].toString());
       sportsArticles.add(article);
       print(sportsArticles[sportsArticles.length - 1].author);
     });
@@ -79,13 +80,25 @@ Future<void> getScienceTechNews() async {
   if (jsonData["status"] == "ok") {
     jsonData["articles"].forEach((div) {
       ArticleDiv article = ArticleDiv(
-          func: () {},
-          imgSrc: div["urlToImage"].toString(),
-          info: div["content"].toString(),
-          header: div["title"].toString(),
-          author: div["author"].toString());
+        imgSrc: div["urlToImage"].toString(),
+        info: div["content"].toString(),
+        header: div["title"].toString(),
+        author: div["author"].toString(),
+        urll: div["url"].toString(),
+      );
       scienceTechArticles.add(article);
       print(scienceTechArticles[scienceTechArticles.length - 1].author);
     });
+  }
+}
+
+launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(
+      url,
+      forceWebView: true,
+    );
+  } else {
+    throw 'Could not launch $url';
   }
 }

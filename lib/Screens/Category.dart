@@ -16,16 +16,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
       getNews();
     } else if (choosenCategory == 'Politics') {
       getPoliticsNews();
+      articles = politicsArticles;
     } else if (choosenCategory == 'Sports') {
       getSportsNews();
+      articles = sportsArticles;
     } else if (choosenCategory == 'Science & Technology') {
       getScienceTechNews();
+      articles = scienceTechArticles;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('$choosenCategory'),
+      ),
       body: Container(
         child: SingleChildScrollView(
           child: ListView.builder(
@@ -33,11 +39,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
             itemCount: articles.length,
             itemBuilder: (context, index) {
               return ArticleDiv(
-                  func: () {},
-                  imgSrc: articles[index].imgSrc,
-                  info: articles[index].info,
-                  header: articles[index].header,
-                  author: articles[index].author);
+                imgSrc: articles[index].imgSrc,
+                info: articles[index].info,
+                header: articles[index].header,
+                author: articles[index].author,
+                urll: articles[index].urll,
+              );
             },
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),

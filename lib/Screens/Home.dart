@@ -66,11 +66,12 @@ class _HomePageState extends State<HomePage> {
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
                       return ArticleDiv(
-                          func: () {},
-                          imgSrc: articles[index].imgSrc,
-                          info: articles[index].info,
-                          header: articles[index].header,
-                          author: articles[index].author);
+                        imgSrc: articles[index].imgSrc,
+                        info: articles[index].info,
+                        header: articles[index].header,
+                        author: articles[index].author,
+                        urll: articles[index].urll,
+                      );
                     },
                     shrinkWrap: true,
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),

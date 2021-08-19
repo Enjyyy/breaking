@@ -1,6 +1,7 @@
+import 'package:breaking/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'Screens/Category.dart';
 
 class NewsCategory extends StatelessWidget {
@@ -55,41 +56,50 @@ class ArticleDiv extends StatelessWidget {
       required this.info,
       required this.header,
       required this.author,
-      required this.func});
+      required this.urll});
   final String imgSrc;
   final String header;
   final String info;
   final String author;
-  final VoidCallback func;
+  final String urll;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: func,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-        child: Column(
-          children: [
-            Image.network(imgSrc),
-            Text(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+      child: Column(
+        children: [
+          Image.network(imgSrc),
+          GestureDetector(
+            onTap: () => launchURL(urll),
+            child: Text(
               header,
               style: TextStyle(
                   color: Colors.blue[400],
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 11),
-            Text(
-              'By: $author',
-              style: TextStyle(
-                color: Colors.blue[900],
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          SizedBox(height: 11),
+          Text(
+            'By: $author.',
+            style: TextStyle(
+              color: Colors.blue[900],
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
             ),
-            SizedBox(height: 11),
-            Text(info)
-          ],
-        ),
+          ),
+          SizedBox(height: 11),
+          Text(
+            info,
+            style: TextStyle(fontSize: 17),
+          ),
+          SizedBox(height: 15),
+          Container(
+            color: Colors.grey,
+            height: 5,
+          )
+        ],
       ),
     );
   }
