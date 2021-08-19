@@ -1,3 +1,4 @@
+import 'package:breaking/Screens/Category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    getNews();
+    setState(() {
+      getNews();
+    });
 
     super.initState();
   }
@@ -41,8 +44,18 @@ class _HomePageState extends State<HomePage> {
                     itemCount: category.length,
                     itemBuilder: (context, index) {
                       return NewsCategory(
-                          imgSrc: category[index][0],
-                          imgTxt: category[index][1]);
+                        imgSrc: category[index][0],
+                        imgTxt: category[index][1],
+                        func: () {
+                          setState(() {
+                            choosenCategory = category[index][1];
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CategoryScreen()));
+                          });
+                        },
+                      );
                     },
                     scrollDirection: Axis.horizontal,
                   ),
@@ -53,6 +66,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: articles.length,
                     itemBuilder: (context, index) {
                       return ArticleDiv(
+                          func: () {},
                           imgSrc: articles[index].imgSrc,
                           info: articles[index].info,
                           header: articles[index].header,

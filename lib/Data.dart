@@ -10,7 +10,10 @@ final category = [
 ];
 
 List<ArticleDiv> articles = [];
-
+List<ArticleDiv> politicsArticles = [];
+List<ArticleDiv> sportsArticles = [];
+List<ArticleDiv> scienceTechArticles = [];
+var choosenCategory;
 Future<void> getNews() async {
   String url =
       'https://newsapi.org/v2/everything?q=tesla&from=2021-07-18&sortBy=publishedAt&apiKey=ee4702e3048d4180a85690b373d48334';
@@ -19,12 +22,70 @@ Future<void> getNews() async {
   if (jsonData["status"] == "ok") {
     jsonData["articles"].forEach((div) {
       ArticleDiv article = ArticleDiv(
+          func: () {},
           imgSrc: div["urlToImage"].toString(),
           info: div["content"].toString(),
           header: div["title"].toString(),
           author: div["author"].toString());
       articles.add(article);
       print(articles[articles.length - 1].author);
+    });
+  }
+}
+
+Future<void> getPoliticsNews() async {
+  String url =
+      'https://newsapi.org/v2/everything?q=tesla&from=2021-07-18&sortBy=publishedAt&apiKey=ee4702e3048d4180a85690b373d48334';
+  var response = await http.get(Uri.parse(url));
+  var jsonData = jsonDecode(response.body);
+  if (jsonData["status"] == "ok") {
+    jsonData["articles"].forEach((div) {
+      ArticleDiv article = ArticleDiv(
+          func: () {},
+          imgSrc: div["urlToImage"].toString(),
+          info: div["content"].toString(),
+          header: div["title"].toString(),
+          author: div["author"].toString());
+      politicsArticles.add(article);
+      print(politicsArticles[politicsArticles.length - 1].author);
+    });
+  }
+}
+
+Future<void> getSportsNews() async {
+  String url =
+      'https://newsapi.org/v2/everything?q=tesla&from=2021-07-18&sortBy=publishedAt&apiKey=ee4702e3048d4180a85690b373d48334';
+  var response = await http.get(Uri.parse(url));
+  var jsonData = jsonDecode(response.body);
+  if (jsonData["status"] == "ok") {
+    jsonData["articles"].forEach((div) {
+      ArticleDiv article = ArticleDiv(
+          func: () {},
+          imgSrc: div["urlToImage"].toString(),
+          info: div["content"].toString(),
+          header: div["title"].toString(),
+          author: div["author"].toString());
+      sportsArticles.add(article);
+      print(sportsArticles[sportsArticles.length - 1].author);
+    });
+  }
+}
+
+Future<void> getScienceTechNews() async {
+  String url =
+      'https://newsapi.org/v2/everything?q=tesla&from=2021-07-18&sortBy=publishedAt&apiKey=ee4702e3048d4180a85690b373d48334';
+  var response = await http.get(Uri.parse(url));
+  var jsonData = jsonDecode(response.body);
+  if (jsonData["status"] == "ok") {
+    jsonData["articles"].forEach((div) {
+      ArticleDiv article = ArticleDiv(
+          func: () {},
+          imgSrc: div["urlToImage"].toString(),
+          info: div["content"].toString(),
+          header: div["title"].toString(),
+          author: div["author"].toString());
+      scienceTechArticles.add(article);
+      print(scienceTechArticles[scienceTechArticles.length - 1].author);
     });
   }
 }
