@@ -14,11 +14,14 @@ List<ArticleDiv> articles = [];
 List<ArticleDiv> politicsArticles = [];
 List<ArticleDiv> sportsArticles = [];
 List<ArticleDiv> scienceTechArticles = [];
+
 var choosenCategory;
+
 List<String> newsUrls = [
+  'https://newsapi.org/v2/top-headlines/country=eg&apiKey=ee4702e3048d4180a85690b373d48334',
+  'https://newsapi.org/v2/top-headlines?country=eg&category=sports&apiKey=ee4702e3048d4180a85690b373d48334',
   'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=ee4702e3048d4180a85690b373d48334',
   'https://newsapi.org/v2/top-headlines/sources?apiKey=ee4702e3048d4180a85690b373d48334',
-  'https://newsapi.org/v2/top-headlines/country=eg&apiKey=ee4702e3048d4180a85690b373d48334'
 ];
 Future<void> getNews() async {
   newsUrls.forEach((url) async {
